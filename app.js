@@ -17,6 +17,16 @@
       const cards=[...panels.children];
       const compact=context.conditions.compact;
       company.classList.add('company-horizontal');
+      function measureCompanyClearance(){
+        if(compact)return;
+        const visual=company.querySelector('.story-visual');
+        const top=visual.getBoundingClientRect().top;
+        const bottom=Math.max(...[visual.querySelector('h2'),visual.querySelector('.company-copy')].map(el=>el.getBoundingClientRect().bottom-top));
+        company.style.setProperty('--company-text-bottom',`${Math.ceil(bottom+28)}px`);
+          company.style.setProperty('--company-track-height',`${Math.ceil(companyTruck.offsetHeight || company.clientWidth*.141)}px`);
+      }
+      measureCompanyClearance();
+      ScrollTrigger.addEventListener('refreshInit',measureCompanyClearance);
       const cardContents=cards.map(card=>{
         const content=document.createElement('div');content.className='company-panel-content';
         content.append(...card.children);card.append(content);return content;
@@ -63,7 +73,7 @@
         .fromTo(hero,{opacity:1},{opacity:0,duration:.15},1.65)
         .fromTo(introLines,{yPercent:115},{yPercent:0,duration:.4,stagger:.14},1.1)
         ;
-      return ()=>{heroScene.before(hero);introParent.prepend(intro);heroScene.remove();company.classList.remove('company-horizontal');cardContents.forEach(content=>content.replaceWith(...content.children));};
+      return ()=>{ScrollTrigger.removeEventListener('refreshInit',measureCompanyClearance);company.style.removeProperty('--company-text-bottom');heroScene.before(hero);introParent.prepend(intro);heroScene.remove();company.classList.remove('company-horizontal');cardContents.forEach(content=>content.replaceWith(...content.children));};
     });
   }
   const header=document.querySelector('.header');

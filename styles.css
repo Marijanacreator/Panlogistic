@@ -345,3 +345,17 @@
  .hero-motion{--hero-type-lift:0px}
  .hero-copy>.eyebrow{top:120px}
 }
+/* Desktop clearance follows the text and vehicle dimensions at every wide viewport. */
+@media(min-width:901px),(min-width:801px) and (min-height:501px){
+ .hero-motion{--hero-eyebrow-top:clamp(110px,12svh,140px);--hero-safe-display-top:max(calc(var(--hero-display-top) - var(--hero-type-lift)),calc(var(--hero-eyebrow-top) + 35px + var(--hero-lead-size) + 18px))}
+ .hero-copy>.eyebrow{top:var(--hero-eyebrow-top);right:auto}
+ .hero-copy h1{top:calc(var(--hero-safe-display-top) - var(--hero-lead-size) - 18px)}
+ .hero-motion .oversized{top:var(--hero-safe-display-top)}
+ .company-horizontal .story-visual{padding-top:110px;height:calc(var(--company-text-bottom,270px) + var(--company-track-height,14.1vw) + 12px)}
+ .company-horizontal .story-panels{height:calc(100% - var(--company-text-bottom,270px) - var(--company-track-height,14.1vw) - 12px)}
+ .company-horizontal .company-copy{top:145px}
+}
+@media(min-width:901px) and (max-height:600px){
+ .company-horizontal .company-copy{top:130px}
+ .company-horizontal .company-panel-content>p{font-size:13px;line-height:1.5}
+}
