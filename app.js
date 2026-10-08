@@ -58,7 +58,7 @@
       heroScene.insertBefore(cover,intro);
       const introLines=[...intro.querySelectorAll('.handoff-line>span')];
       gsap.set([intro,cover],{y:innerHeight});gsap.set(cover,{height:innerHeight});gsap.set(introLines,{yPercent:115});
-      const motion=gsap.timeline({defaults:{ease:'none',immediateRender:false},onUpdate:updateNavigation,scrollTrigger:{trigger:heroScene,pin:true,pinType:'fixed',refreshPriority:20,start:'top top',end:()=>`+=${innerHeight*(compact?1.3:2.2)}`,scrub:true,anticipatePin:1}});
+      const motion=gsap.timeline({defaults:{ease:'none',immediateRender:false},onUpdate:updateNavigation,scrollTrigger:{trigger:heroScene,pin:true,pinType:'fixed',invalidateOnRefresh:true,refreshPriority:20,start:'top top',end:()=>`+=${innerHeight*(compact?1.3:2.2)}`,scrub:true,anticipatePin:1}});
       // Compensate only the mobile word for the truck roof's measured approach rise.
       if(compact)motion.fromTo('.hero-motion .oversized',{y:0},{y:()=>-typeTruck.offsetHeight*.3,duration:.85,ease:'none'},0);
       motion.fromTo(typeTruck,{xPercent:compact?0:40,x:0,scale:1},{xPercent:0,x:0,scale:compact?1.3:1.65,duration:.85},0)
@@ -66,7 +66,7 @@
         .fromTo('.hero-motion .oversized',{scale:1},{scale:compact?2.3:3.8,duration:1.65,ease:'power1.in'},0)
         .fromTo('.hero-motion .oversized',{opacity:.72},{opacity:1,duration:.6},0)
         .to('.hero-motion .oversized',{opacity:0,duration:.4},1.25)
-        .fromTo(compact?'.hero-copy > *,.hero-scroll':'.hero-copy,.hero-scroll',{y:0,opacity:1},{y:-24,opacity:0,duration:.45},.05)
+        .fromTo('.hero-copy > *,.hero-scroll',{y:0,opacity:1},{y:-24,opacity:0,duration:.45},.05)
         .fromTo(intro,{y:()=>innerHeight},{y:0,duration:1},compact?.65:.8)
         .fromTo(cover,{y:()=>innerHeight},{y:0,duration:1},compact?.65:.8)
         .fromTo(cover,{height:()=>innerHeight},{height:()=>intro.offsetHeight,duration:.4},1.4)

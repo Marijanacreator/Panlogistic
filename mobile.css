@@ -16,7 +16,7 @@
  .mobile-navigation .language-switch button{padding:10px 4px}
 }
 @media(max-width:600px),(max-width:900px) and (max-height:500px){
- .hero-motion .mobile-hero-composition{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;align-content:center;gap:12px;min-height:100svh;padding:clamp(110px,17svh,145px) var(--space) 24px;width:100%}
+ .hero-motion .mobile-hero-composition{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto;align-content:center;gap:12px;min-height:100svh;padding:clamp(110px,17svh,145px) var(--space) 24px;width:100%}
  .mobile-hero-composition .hero-copy{display:contents;pointer-events:auto}
  .mobile-hero-composition .hero-copy>.eyebrow{position:static;grid-row:1;margin:0;max-width:none;font-size:8px;line-height:1.5}
  .mobile-hero-composition .hero-copy h1{position:static;grid-row:2;font-size:clamp(30px,8vw,38px);line-height:1.02;white-space:normal;max-width:260px;margin:5px 0 0}
@@ -119,3 +119,38 @@
  .mobile-hero-composition .hero-copy-bottom{margin-top:10px}
  .mobile-hero-composition .hero-scroll{margin-top:22px}
 }
+
+/* Removing the eyebrow closes its grid row without changing vehicle geometry. */
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ .mobile-hero-composition .hero-copy h1{grid-row:1;margin-top:0}
+ .hero-motion .mobile-hero-composition .oversized{grid-row:2}
+ .hero-motion .mobile-hero-composition .type-truck{grid-row:3}
+ .mobile-hero-composition .hero-copy-bottom{grid-row:4}
+ .mobile-hero-composition .hero-scroll{grid-row:5}
+}
+
+@media(min-width:601px) and (max-width:900px) and (max-height:500px){
+ .mobile-hero-composition .hero-copy-bottom{grid-row:3}
+ .mobile-hero-composition .hero-scroll{grid-row:4}
+}
+
+/* Services carousel is isolated from the desktop scroll stage. */
+@media(max-width:767px){
+ .services-carousel .services-stage{position:relative;overflow:hidden;touch-action:pan-y;transition:height 420ms cubic-bezier(.22,.61,.36,1)}
+ .services-carousel .service-slide{position:absolute;inset:0 auto auto 0;width:100%;height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);border:0}
+ .services-carousel .service-slide[hidden]{display:none!important}
+ .services-carousel .service-visual{height:clamp(200px,62vw,420px);min-height:0;max-height:none}
+ .services-carousel .service-photo{pointer-events:none;user-select:none}
+ .services-carousel .service-content{height:auto;padding:28px var(--space) 28px;overflow:visible}
+ .services-carousel .service-content h3{font-size:clamp(28px,7.2vw,48px);margin-top:16px}
+ .services-carousel .service-description{font-size:14px;line-height:1.5;margin-top:18px}
+ .services-carousel .service-explore{margin-top:20px;padding-top:14px}
+ .services-carousel .service-explore summary{font-size:13px}
+ .services-carousel-controls{position:relative;z-index:2;display:flex;align-items:center;gap:10px;padding:0 var(--space) 32px;background:var(--paper);color:var(--ink)}
+ .services-carousel-progress{margin-right:auto;font-size:11px;letter-spacing:.1em}
+ .services-carousel-bars{display:flex;gap:6px;align-items:center}
+ .services-carousel-bars>span{width:clamp(22px,6vw,32px);height:2px;background:#12334226}
+ .services-carousel-bars>span.is-active{background:var(--blue)}
+ .services-carousel .services-stage:focus-visible{outline:1px solid currentColor;outline-offset:-3px}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){.services-carousel .services-stage{transition:none}}
