@@ -772,3 +772,15 @@ html.custom-cursor input,html.custom-cursor textarea,html.custom-cursor [content
  .hero-scroll{position:relative;grid-row:5;top:auto;bottom:auto;left:auto;margin:0}
 }
 @media(prefers-reduced-motion:reduce){.hero-motion .oversized{will-change:auto}.hero-motion .type-truck{transform:none!important}}
+
+/* Reserve the complete card reveal before sizing the desktop vehicle track. */
+@media(min-width:901px),(min-width:801px) and (min-height:501px){
+.company-horizontal .story-truck{width:var(--company-truck-width,42%)}
+}
+@media(min-width:901px) and (max-height:750px){
+.company-horizontal .story-visual h2{font-size:clamp(30px,6svh,45px)}
+.company-horizontal .story-panels{padding-top:16px;padding-bottom:16px}
+.company-horizontal .info-panel{padding-top:12px;padding-bottom:12px}
+.company-horizontal .info-panel h3{font-size:clamp(24px,4svh,30px);margin:16px 0 14px}
+.company-horizontal .company-panel-content>p{font-size:13px;line-height:1.5}
+}

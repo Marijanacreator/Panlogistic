@@ -22,18 +22,25 @@
         const visual=company.querySelector('.story-visual');
         const top=visual.getBoundingClientRect().top;
         const bottom=Math.max(...[visual.querySelector('h2'),visual.querySelector('.company-copy')].map(el=>el.getBoundingClientRect().bottom-top));
-        company.style.setProperty('--company-text-bottom',`${Math.ceil(bottom+28)}px`);
-          company.style.setProperty('--company-track-height',`${Math.ceil(companyTruck.offsetHeight || company.clientWidth*.141)}px`);
+        const padding=el=>{const css=getComputedStyle(el);return parseFloat(css.paddingTop)+parseFloat(css.paddingBottom);};
+        const panelHeight=Math.max(...cardContents.map((content,index)=>content.offsetHeight+padding(cards[index])))+padding(panels);
+        const textBottom=Math.ceil(bottom+28);
+        const ratio=companyTruck.naturalHeight/companyTruck.naturalWidth || .335;
+        const desiredWidth=company.clientWidth*(innerHeight<=600?.34:.42);
+        const width=Math.min(desiredWidth,Math.max(0,company.clientHeight-textBottom-panelHeight-12)/ratio);
+        company.style.setProperty('--company-text-bottom',`${textBottom}px`);
+        company.style.setProperty('--company-truck-width',`${width}px`);
+        company.style.setProperty('--company-track-height',`${Math.ceil(width*ratio)}px`);
       }
-      measureCompanyClearance();
-      ScrollTrigger.addEventListener('refreshInit',measureCompanyClearance);
       const cardContents=cards.map(card=>{
         const content=document.createElement('div');content.className='company-panel-content';
         content.append(...card.children);card.append(content);return content;
       });
+      measureCompanyClearance();
+      ScrollTrigger.addEventListener('refreshInit',measureCompanyClearance);
       gsap.set(cardContents,{clipPath:'circle(0% at 0% 0%)'});
       gsap.set(companyTruck,{xPercent:0,x:-companyTruck.offsetWidth});
-      const journey=gsap.timeline({defaults:{ease:'none',immediateRender:false},scrollTrigger:{id:'company-truck-journey',trigger:company,pin:company,pinType:'fixed',refreshPriority:5,start:'top top',end:()=>`+=${innerHeight*2.8}`,scrub:true,anticipatePin:1}});
+      const journey=gsap.timeline({defaults:{ease:'none',immediateRender:false},scrollTrigger:{id:'company-truck-journey',invalidateOnRefresh:true,trigger:company,pin:company,pinType:'fixed',refreshPriority:5,start:'top top',end:()=>`+=${innerHeight*2.8}`,scrub:true,anticipatePin:1}});
       // Positive X is exclusively a left-to-right journey when scrolling down.
       journey.fromTo(companyTruck,{xPercent:0,x:()=>-companyTruck.offsetWidth},{x:()=>company.clientWidth+32,duration:2.5},0);
       if(compact)journey.fromTo(panels,{x:0},{x:()=>-company.clientWidth*2,duration:1.3},.8);
@@ -73,7 +80,7 @@
         .fromTo(hero,{opacity:1},{opacity:0,duration:.15},1.65)
         .fromTo(introLines,{yPercent:115},{yPercent:0,duration:.4,stagger:.14},1.1)
         ;
-      return ()=>{ScrollTrigger.removeEventListener('refreshInit',measureCompanyClearance);company.style.removeProperty('--company-text-bottom');heroScene.before(hero);introParent.prepend(intro);heroScene.remove();company.classList.remove('company-horizontal');cardContents.forEach(content=>content.replaceWith(...content.children));};
+      return ()=>{ScrollTrigger.removeEventListener('refreshInit',measureCompanyClearance);['--company-text-bottom','--company-track-height','--company-truck-width'].forEach(name=>company.style.removeProperty(name));heroScene.before(hero);introParent.prepend(intro);heroScene.remove();company.classList.remove('company-horizontal');cardContents.forEach(content=>content.replaceWith(...content.children));};
     });
   }
   const header=document.querySelector('.header');

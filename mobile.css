@@ -154,3 +154,9 @@
  .services-carousel .services-stage:focus-visible{outline:1px solid currentColor;outline-offset:-3px}
 }
 @media(max-width:767px) and (prefers-reduced-motion:reduce){.services-carousel .services-stage{transition:none}}
+
+/* Anchor only the portrait scroll cue to the visible Hero's lower edge. */
+@media(max-width:600px){
+ .hero-motion .mobile-hero-composition{padding-bottom:72px}
+ .mobile-hero-composition .hero-scroll{position:absolute;left:0;right:0;bottom:clamp(24px,3svh,32px);margin:0;justify-content:center}
+}
