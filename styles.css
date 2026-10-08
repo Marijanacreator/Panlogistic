@@ -784,3 +784,8 @@ html.custom-cursor input,html.custom-cursor textarea,html.custom-cursor [content
 .company-horizontal .info-panel h3{font-size:clamp(24px,4svh,30px);margin:16px 0 14px}
 .company-horizontal .company-panel-content>p{font-size:13px;line-height:1.5}
 }
+
+/* The reveal wrapper must retain its intrinsic text height inside flex cards. */
+@media(min-width:901px),(min-width:801px) and (min-height:501px){
+.company-panel-content{flex-shrink:0}
+}
