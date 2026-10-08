@@ -1,0 +1,44 @@
+/* Text-only localization: preserve the existing elements and animation targets. */
+(() => {
+ const translations = {"Open menu":"Otvori meni", "Close menu":"Zatvori meni","Minimal technical side profile of a semi-truck and trailer":"Tehnički prikaz kamiona sa prikolicom", "Experience timeline from start to today":"Vremenska linija iskustva od početka do danas","Skip to content": "Pređi na sadržaj", "Services": "Usluge", "Company": "Kompanija", "Let’s talk": "Kontakt", "INTERNATIONAL TRANSPORT & LOGISTICS": "MEĐUNARODNI TRANSPORT I LOGISTIKA", "PANLOGISTIC / INTERNATIONAL ROAD TRANSPORT": "PANLOGISTIC / MEĐUNARODNI DRUMSKI TRANSPORT", "Built to move business": "Pokrećemo vaše poslovanje", "forward.": "napred.", "FORWARD": "NAPRED", "International road transport across Europe.": "Međunarodni drumski transport robe širom Evrope, prilagođen potrebama vašeg poslovanja.", "Explore our capabilities": "Istražite naše usluge", "SCROLL TO EXPLORE": "SKROLUJTE ZA VIŠE", "Transport built": "Transportna rešenja", "around your business.": "za evropsko tržište.", "Explore the transport services and operational support Panlogistic provides to businesses operating across European markets.": "Međunarodni drumski transport i koordinacija prevoza za kompanije koje uvoze, izvoze i distribuiraju robu.", "01 / INTERNATIONAL TRANSPORT": "01 / MEĐUNARODNI TRANSPORT", "Across borders.": "Transport koji povezuje", "With purpose.": "vaša tržišta.", "International road transport connecting businesses across European markets.": "Međunarodni drumski prevoz za kompanije koje uvoze, izvoze i distribuiraju robu širom Evrope.", "Explore our transport services": "Istražite transportne usluge", "02 / LOGISTICS & COORDINATION": "02 / LOGISTIKA I KOORDINACIJA", "Every movement,": "Vi planirate poslovanje.", "coordinated.": "Mi koordinišemo transport.", "Transport planning and coordination shaped around the requirements of each shipment.": "Planiranje i koordinacija transporta prema potrebama svake pošiljke.", "Explore our approach": "Upoznajte naš pristup", "03 / WAREHOUSING": "03 / SKLADIŠTENJE", "Space for your goods.": "Prostor za vašu robu.", "Warehousing and goods handling coordinated with your transport requirements.": "Skladištenje i rukovanje robom usklađeni sa vašim transportnim zahtevima.", "Explore warehousing": "Istražite skladištenje", "03 / THE COMPANY IN MOTION": "03 / KOMPANIJA U POKRETU", "A partner behind": "Partner iza", "every delivery.": "svake isporuke.", "Behind every transport operation are the people, planning and coordination that keep goods moving between businesses.": "Iza svakog transporta stoje ljudi, planiranje i koordinacija koji omogućavaju promet robe između kompanija.", "Get to know Panlogistic": "Upoznajte Panlogistic", "01 / REACH & FLEET": "01 / EVROPSKA TRŽIŠTA", "Built for the": "Povezujemo vas", "road ahead.": "sa Evropom.", "Discover the fleet and European transport operations behind Panlogistic.": "Drumski prevoz robe između tržišta na kojima poslujete.", "02 / FLEET": "02 / VOZNI PARK", "Fleet supporting": "Kapaciteti za", "your business.": "vaš teret.", "People and vehicles supporting transport operations.": "Upoznajte vozni park koji stoji iza naših transportnih usluga.", "03 / APPROACH": "03 / ORGANIZACIJA", "Planning and": "Prevoz usklađen", "coordination.": "sa vašim zahtevima.", "05 / A SHARED DIRECTION": "05 / ZAJEDNIČKI PRAVAC", "International transport.": "Međunarodni transport.", "Built around": "U službi", "business.": "poslovanja.", "People, planning and coordination.": "Ljudi, planiranje i koordinacija.", "Supporting transport between businesses.": "Podrška transportu između kompanija.", "06 / PANLOGISTIC IN NUMBERS": "06 / PANLOGISTIC U BROJKAMA", "Our operations,": "Naši kapaciteti.", "at a glance.": "U brojkama.", "A closer look at the people, fleet and transport capabilities behind the company.": "Bliži pogled na ljude, vozni park i transportne kapacitete kompanije.", "European markets": "Evropskih tržišta", "Vehicles": "Vozila", "Years of experience": "Godina iskustva", "International routes": "Međunarodnih ruta", "START": "POČETAK", "TODAY": "DANAS", "07 / CONTACT": "07 / KONTAKT", "Let's talk transport.": "Razgovarajmo o transportu.", "Tell us about your transport requirements and start a conversation with our team.": "Podelite svoje transportne zahteve i započnite razgovor sa našim timom.", "Get in touch": "Kontaktirajte nas", "21000 Novi Sad, Serbia": "21000 Novi Sad, Srbija", "Back to top ↑": "Na vrh ↑", "Main navigation": "Glavna navigacija", "Panlogistic home": "Panlogistic početna", "Website language": "Jezik sajta", "Panlogistic truck": "Panlogistic kamion", "Panlogistic truck on an international route across Europe": "Panlogistic kamion na međunarodnoj ruti kroz Evropu", "Panlogistic truck at a logistics loading dock": "Panlogistic kamion na utovarnoj rampi", "Forklift moving palletised goods inside a warehouse": "Viljuškar sa paletizovanom robom u skladištu", "European map with twelve illustrative market locations": "Mapa Evrope sa dvanaest ilustrativnih tržišta", "European map with illustrative transport connections, not confirmed Panlogistic routes": "Mapa Evrope sa ilustrativnim transportnim vezama", "Illustrative European transport connections": "Ilustrativne evropske transportne veze"};
+ const entries=[];
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){
+  const node=walker.currentNode;
+  if(node.parentElement.closest('script,style,.language-switch'))continue;
+  const key=node.textContent.trim();
+  const translated=node.parentElement.closest('[data-service="02"]')&&key==='Transport planning and coordination shaped around the requirements of each shipment.'
+   ? 'Od organizacije prevoza do koordinacije pošiljki, transportni proces usklađen sa vašim potrebama.' : translations[key];
+  if(translated)entries.push({node,en:node.textContent,sr:node.textContent.replace(key,node.parentElement.closest('.mobile-hero-eyebrow')?'Međunarodni drumski transport širom Evrope.':translated)});
+ }
+ const attributes=[];
+ document.querySelectorAll('[aria-label],[alt]').forEach(el=>{
+  ['aria-label','alt'].forEach(name=>{const en=el.getAttribute(name);if(translations[en])attributes.push({el,name,en,sr:translations[en]});});
+ });
+ const meta=document.querySelector('meta[name="description"]');
+ const englishDescription=meta.content;
+ function apply(language,refresh=false){
+  const sr=language==='sr';
+  document.documentElement.lang=sr?'sr-Latn':'en';
+  entries.forEach(item=>{item.node.textContent=sr?item.sr:item.en;});
+  document.querySelectorAll('#hero-title,.hero-motion .oversized,.hero-copy-bottom>p,#service-title-01,#service-title-02,[data-service="01"] .service-description,[data-service="01"] details>p,[data-service="02"] .service-description,[data-service="02"] details>p').forEach(el=>el.setAttribute('lang',sr?'sr-Latn':'en'));
+  attributes.forEach(item=>item.el.setAttribute(item.name,sr?item.sr:item.en));
+  document.title=sr?'Panlogistic — Međunarodni drumski transport':'Panlogistic — International road transport';
+  meta.content=sr?'Panlogistic — međunarodni drumski transport i logistika širom Evrope.':englishDescription;
+  document.querySelectorAll('[data-language]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.language===language)));
+  if(refresh&&window.ScrollTrigger)requestAnimationFrame(()=>ScrollTrigger.refresh());
+ }
+ let preferred='en';
+ try{if(localStorage.getItem('panlogistic-language')==='sr')preferred='sr';}catch{}
+ apply(preferred);
+ document.querySelectorAll('[data-language]').forEach(button=>button.addEventListener('click',()=>{
+  const language=button.dataset.language;
+  apply(language,true);
+  try{localStorage.setItem('panlogistic-language',language);}catch{}
+ }));
+})();
+
+
+
+
+

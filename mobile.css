@@ -1,0 +1,108 @@
+.mobile-hero-eyebrow{display:none}
+/* Independent mobile layout. Desktop geometry lives in styles.css. */
+.mobile-navigation[hidden]{display:none!important}
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ .header,.header.is-scrolled{height:76px;padding:18px 22px;align-items:center}
+ .header .wordmark{font-size:24px;padding-left:36px}
+ .header .wordmark svg{width:28px;height:33px}
+ .header .wordmark span{font-size:5px}
+ .header #site-navigation{display:none!important}
+ .header .menu-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;width:44px;height:44px;padding:10px;border:0;background:none;color:inherit}
+ .menu-toggle span{display:block;width:24px;height:1px;background:currentColor}
+ .mobile-navigation{position:fixed;inset:0;width:100%;height:100dvh;z-index:200;background:var(--brand-navy);color:var(--paper);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:88px var(--space) 40px;gap:28px;font-size:clamp(34px,9vw,46px);letter-spacing:-.04em}
+ .mobile-navigation .menu-close{display:grid;place-items:center;position:absolute;right:20px;top:16px;width:44px;height:44px;border:0;background:none;color:inherit;font:300 36px Arial}
+ .mobile-navigation .language-switch{font-size:16px;gap:12px;margin-top:22px}
+ .mobile-navigation button:focus-visible,.menu-toggle:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+ .mobile-navigation .language-switch button{padding:10px 4px}
+}
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ .hero-motion .mobile-hero-composition{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;align-content:center;gap:12px;min-height:100svh;padding:clamp(110px,17svh,145px) var(--space) 24px;width:100%}
+ .mobile-hero-composition .hero-copy{display:contents;pointer-events:auto}
+ .mobile-hero-composition .hero-copy>.eyebrow{position:static;grid-row:1;margin:0;max-width:none;font-size:8px;line-height:1.5}
+ .mobile-hero-composition .hero-copy h1{position:static;grid-row:2;font-size:clamp(30px,8vw,38px);line-height:1.02;white-space:normal;max-width:260px;margin:5px 0 0}
+ .hero-motion .mobile-hero-composition .oversized{position:relative;grid-row:3;top:auto;left:auto;right:auto;margin:0;width:100%;font-size:var(--word-fit,16vw);line-height:.82;transform-origin:50% 50%;white-space:nowrap}
+ .hero-motion .mobile-hero-composition .type-truck{position:relative;grid-row:4;left:auto;bottom:auto;width:calc(100% + 2 * var(--space));max-width:none;height:auto;margin:-45px calc(-1 * var(--space)) 0;transform-origin:50% 100%;pointer-events:none}
+ .mobile-hero-composition .hero-copy-bottom{position:static;grid-row:5;display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:0;font-size:12px;line-height:1.5}
+ .mobile-hero-composition .hero-copy-bottom>p{max-width:330px;opacity:1}
+ .mobile-hero-composition .hero-cta{margin:0;padding:5px 0;font-size:12px}
+ .mobile-hero-composition .hero-scroll{position:static;grid-row:6;justify-content:center;margin-top:12px;font-size:8px;gap:18px}
+ #company.company-horizontal{padding:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:0;height:100svh}
+ .company-horizontal .story-visual{height:auto;padding:86px var(--space) 0;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;overflow:visible}
+ .company-horizontal .story-visual>.eyebrow{grid-row:1;font-size:8px}
+ .company-horizontal .story-visual h2{grid-row:2;margin:0;max-width:none;font-size:clamp(27px,7.4vw,36px)}
+ .company-horizontal .company-copy{grid-row:3;position:static;top:auto;right:auto;width:auto;max-width:none;margin:0;font-size:12px;line-height:1.5}
+ .company-horizontal .company-copy a{font-size:12px;margin-top:10px}
+ .company-horizontal .story-truck-layer{grid-row:4;position:relative;inset:auto;padding:0;height:calc(22vw + 14px);margin:0 calc(-1 * var(--space));overflow:visible}
+ .company-horizontal .story-truck{width:64%;bottom:-8px}
+ .company-horizontal .road-rule{position:absolute;bottom:0;left:0;width:100%;margin:0}
+ .company-horizontal .story-panels{height:100%;min-height:0;margin:0;width:300%;padding:14px 0;overflow:hidden}
+ .company-horizontal .info-panel{min-height:0;padding:16px var(--space)}
+ .company-horizontal .info-panel h3{font-size:clamp(27px,7.5vw,36px);margin:14px 0}
+ .company-horizontal .company-panel-content>p{font-size:12px;line-height:1.5}
+ #numbers.numbers-enhanced{height:100svh;min-height:0;padding:85px var(--space) 20px;gap:20px;grid-template-rows:auto minmax(0,1fr)}
+ #numbers .numbers-intro{text-align:left}
+ #numbers .numbers-intro h2{font-size:clamp(29px,8vw,36px);margin-top:14px;line-height:1.02}
+ #numbers .numbers-intro .eyebrow{font-size:8px}
+ #numbers .numbers-intro .section-intro-copy{font-size:12px;line-height:1.5;margin-top:12px;max-width:350px}
+ #numbers .numbers-stage{height:100%;min-height:0;margin:0}
+ #numbers.numbers-enhanced .number-state{justify-content:center;align-items:center;padding:0;text-align:center;gap:0}
+ #numbers .stat-value{font-size:clamp(100px,20svh,165px);line-height:.95}
+ #numbers .number-state h3{font-size:16px;margin-top:12px;text-align:center}
+ #numbers .number-visual{width:min(100%,280px);height:auto;max-height:none;aspect-ratio:440/300;margin:22px auto 0;flex-shrink:0;object-position:center;overflow:visible}
+ .contact-title{font-size:clamp(44px,11vw,64px)}
+}
+@media(max-width:600px) and (max-height:650px){
+ .hero-motion .mobile-hero-composition{padding-top:85px;gap:9px}
+ .mobile-hero-composition .hero-scroll{margin-top:4px}
+ #numbers.numbers-enhanced{padding-top:78px;gap:12px}
+ #numbers .numbers-intro h2{font-size:28px;margin-top:10px}
+ #numbers .numbers-intro .section-intro-copy{font-size:11px;margin-top:8px}
+ #numbers .stat-value{font-size:90px}
+ #numbers .number-visual{width:min(100%,220px);margin-top:16px}
+ .company-horizontal .story-visual{padding-top:78px;gap:8px}
+ .company-horizontal .story-visual h2{font-size:27px}
+ .company-horizontal .company-copy{font-size:11px}
+ .company-horizontal .info-panel h3{font-size:26px;margin:10px 0}
+}
+@media(min-width:601px) and (max-width:900px) and (max-height:500px){
+ .hero-motion .mobile-hero-composition{grid-template-columns:1fr 1fr;min-height:100svh;align-content:start}
+ .mobile-hero-composition .hero-copy h1{max-width:none}
+ .hero-motion .mobile-hero-composition .oversized,.hero-motion .mobile-hero-composition .type-truck{grid-column:1/-1}
+ .mobile-hero-composition .hero-copy-bottom{grid-column:1/-1}
+ .company-horizontal .story-visual{grid-template-columns:1fr 1fr;padding-top:76px}
+ .company-horizontal .story-visual>.eyebrow{grid-column:1/-1}
+ .company-horizontal .company-copy{grid-row:2;grid-column:2}
+ .company-horizontal .story-truck-layer{grid-column:1/-1;height:65px}
+ .company-horizontal .story-truck{width:30%}
+ #numbers.numbers-enhanced{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+ #numbers .number-visual{width:180px;margin-top:10px}
+ #numbers .stat-value{font-size:90px}
+}
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ #home.hero-motion{padding:0}
+}
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ #company.company-horizontal{grid-template-columns:minmax(0,1fr)}
+}
+
+@media(min-width:601px) and (max-width:900px) and (max-height:500px){
+ .hero-motion .mobile-hero-composition{padding:80px var(--space) 12px;gap:6px;align-content:center}
+ .mobile-hero-composition .hero-copy>.eyebrow{grid-column:1/-1}
+ .mobile-hero-composition .hero-copy h1{grid-column:1/-1;font-size:26px;margin:0}
+ .hero-motion .mobile-hero-composition .oversized{font-size:9vw;line-height:.82}
+ .hero-motion .mobile-hero-composition .type-truck{grid-row:4;grid-column:2;width:calc(100% + var(--space));margin:-90px 0 0;justify-self:end}
+ .mobile-hero-composition .hero-copy-bottom{grid-row:4;grid-column:1;font-size:10px;gap:7px;align-self:end}
+ .mobile-hero-composition .hero-cta{font-size:11px}
+ .mobile-hero-composition .hero-scroll{grid-row:5;grid-column:1/-1;margin:4px 0 0}
+}
+
+/* Mobile category copy replaces the desktop company eyebrow. */
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ .hero-copy>.eyebrow .desktop-hero-eyebrow{display:none}
+ .hero-copy>.eyebrow .mobile-hero-eyebrow{display:inline;text-transform:uppercase}
+ .mobile-hero-composition .hero-copy-bottom>p{display:none}
+}
+
+@media(max-width:600px),(max-width:900px) and (max-height:500px){
+ .mobile-hero-composition .hero-scroll{position:absolute;left:0;right:0;bottom:24px;margin:0;justify-content:center}
+}
