@@ -37,6 +37,7 @@
  const mapAttributes=new Map();
  document.querySelectorAll('.markets-map,.routes-map').forEach(map=>mapAttributes.set(map,map.getAttribute('preserveAspectRatio')));
  function fit(){
+  if(hero.classList.contains("hero-video-trial"))return;
   if(!composition){hero.style.setProperty('--hero-header-height',`${Math.max(header.offsetHeight,header.querySelector('.wordmark').offsetHeight+60)}px`);return;}
   const word=hero.querySelector('.oversized');
   const style=getComputedStyle(word),canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
